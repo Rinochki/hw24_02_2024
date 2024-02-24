@@ -1,6 +1,7 @@
 import random
 from tkinter import *
 import tkinter.messagebox
+sprobs = 0
 
 def generation():
     try:
@@ -9,9 +10,10 @@ def generation():
         if poch >= kin:
             tkinter.messagebox.showwarning("Зауваження", "Перше число має бути меншим за друге!")
         else:
-            global gen_num
+            global gen_num, sprobs
             gen_num = random.randint(poch, kin)
-            root.title(str(gen_num))
+            root.title(f'Ти використав {sprobs} спроб! кількість не обмежена!')
+            sprobs += 1
             but_gen['state'] = 'disable'
             ent_start['state'] = 'disable'
             ent_end['state'] = 'disable'
@@ -19,10 +21,16 @@ def generation():
         tkinter.messagebox.showerror("Помилка", "Потрібно ввести цілі числа!")
 
 def chislo():
-    pass
-    # try:
-    #     chisl = int(ent_game.get())
-    #     if chisl == gen_num:
+    try:
+        chisl = int(ent_game.get())
+        if chisl == gen_num:
+            tkinter.messagebox.askyesno("Перемога буде!", "Ти грьобаниий волшебнік) Хочеш ще гратись?")
+        elif chisl < gen_num:
+            tkinter.messagebox.showinfo("Ти зможеш!", "Що то таке має бути, бери більше ;)")
+        elif chisl > gen_num:
+            tkinter.messagebox.showinfo("Я вірю в тебе!", "Йой не бери так багацько :)")
+    except:
+        pass
 
 
 gen_num = 0
